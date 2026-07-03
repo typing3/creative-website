@@ -1,0 +1,383 @@
+@import url('https://googleapis.com');
+
+:root {
+  --hud-font-sans: 'Montserrat', sans-serif;
+  --hud-font-serif: 'Cinzel', serif;
+  
+  --bg-deep-void: #0a0810;
+  --panel-glass: rgba(20, 17, 28, 0.45);
+  --panel-border: rgba(224, 169, 109, 0.08);
+  --panel-border-hover: rgba(224, 169, 109, 0.25);
+  
+  --text-pure: #fcfbfe;
+  --text-dim: #7f788a;
+  --copper-gold: #e0a96d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--hud-font-sans);
+  background-color: var(--bg-deep-void);
+  color: var(--text-pure);
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hud-ambient-wash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 15% 25%, rgba(91, 62, 132, 0.15) 0%, transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(224, 169, 109, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Fixed Global UI Header Component */
+.hud-global-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 35px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  background: linear-gradient(to bottom, #0a0810 40%, transparent);
+}
+
+.brand-monogram {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 6px;
+}
+
+.clock-telemetry-module {
+  font-family: var(--hud-font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--copper-gold);
+}
+
+.calendar-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 6px 16px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.01);
+}
+
+.active-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #00ffaa;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ffaa;
+  animation: pulseLight 2s infinite;
+}
+
+.weekday-string {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Horizontal Viewport Paging Track Platform */
+.hud-pages-viewport {
+  display: flex;
+  width: 400vw;
+  height: 100vh;
+  will-change: transform;
+}
+
+.hud-page-view {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6%;
+}
+
+/* MODERN EXPANDED HIGH-DENSITY 4-COLUMN BENTO GRID PLATFORM */
+.static-modular-four-column-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 175px;
+  gap: 20px;
+  width: 100%;
+  max-width: 1400px;
+  align-items: stretch;
+}
+
+.static-glass-card {
+  background: var(--panel-glass);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Asymmetric size multipliers for structural design variety */
+.size-double-height {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 40px;
+}
+
+.static-glass-card:hover {
+  border-color: var(--panel-border-hover);
+  box-shadow: 0 40px 80px rgba(91, 62, 132, 0.08), inset 0 1px 1px rgba(255,255,255,0.08);
+}
+
+.node-serial-id {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--copper-gold);
+}
+
+.hud-main-heading {
+  font-size: 38px;
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.serif-glint-accent {
+  font-family: var(--hud-font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--copper-gold);
+  text-shadow: 0 0 20px rgba(224, 169, 109, 0.12);
+}
+
+.hud-description-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.module-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Range Sliders Inner Assembly */
+.range-rack-control {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slider-row label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.hud-range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  outline: none;
+}
+
+.hud-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--copper-gold);
+  cursor: pointer;
+}
+
+/* Textarea Field */
+.hud-custom-textarea {
+  width: 100%;
+  height: 85px;
+  background: rgba(5,5,8,0.4);
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 6px;
+  padding: 10px;
+  color: var(--text-dim);
+  font-family: var(--hud-font-sans);
+  font-size: 11px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+}
+
+.hud-custom-textarea:focus {
+  border-color: var(--copper-gold);
+  color: var(--text-pure);
+}
+
+/* Circular Metric Readout */
+.circular-dial-container {
+  width: 75px;
+  height: 75px;
+  border: 2px solid rgba(255,255,255,0.02);
+  border-top-color: var(--copper-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.center-metric-readout {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.metric-footer-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* NEW ADDITIONS: Telemetry Rows Module Styles */
+.telemetry-log-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.log-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.dot-green {
+  width: 5px;
+  height: 5px;
+  background-color: #00ffaa;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #00ffaa;
+}
+
+/* NEW ADDITIONS: Mock Metric Data Progress Micro Bar Chart */
+.bar-chart-mock {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255,255,255,0.03);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: #00ffaa;
+  border-radius: 2px;
+}
+
+/* RIGID RIGHT FIXED NAVIGATION ARROW */
+.hud-right-nav-arrow {
+  position: fixed;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(20, 17, 28, 0.6);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 110;
+  color: var(--text-pure);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hud-right-nav-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  border-color: var(--copper-gold);
+  box-shadow: 0 0 20px rgba(224, 169, 109, 0.15);
+}
+
+.arrow-svg-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s ease;
+}
+
+.hud-right-nav-arrow:hover .arrow-svg-icon {
+  transform: translateX(3px);
+}
+
+.hud-bottom-page-index-tracker {
+  position: fixed;
+  bottom: 35px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255,255,255,0.2);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 50;
+}
+
+@keyframes pulseLight {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+@media (max-width: 1200px) {
+  .hud-global-header { padding: 25px 30px; }
+  .static-modular-four-column-layout { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+  .size-double-height { grid-column: span 2; }
+  .hud-pages-viewport { width: auto; height: auto; display: block; }
+  .hud-page-view { height: auto; width: 100vw; padding: 120px 20px 60px 20px; }
+  .hud-right-nav-arrow { display: none; }
+}
